@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Open Slide Carousel</title>
+		<link rel="stylesheet" title="style_OpenSlideCarousel" type="text/css" href="style\style_osc.css">
+		<script src="script/osc.js"></script>
+	</head>
+	<body>
+		Slideshow from/to
+		<div class="content-box">	<!-- .content-box: surrounds itemContainer and navigation-->
+			<div id="slide_StoE" class="carousel-items" data-viewSize="3" data-loop="false">	<!-- id: You are free to choose (must be unique)  .carousel-items: important for onClickHandler-->
+				<div class="item">
+					<p>0</p>
+					<!--put your stuff inside -->					
+				</div>
+				<div class="item">
+					<p>1</p>
+					<!--put your stuff inside -->
+				</div>
+				<div class="item">
+					<p>2</p>
+					<!--put your stuff inside -->
+				</div>
+				<div class="item">
+					<p>3</p>
+					<!--put your stuff inside -->
+				</div>
+				<div class="item">
+					<p>4</p>
+					<!--put your stuff inside -->
+				</div>
+				<div class="item">
+					<p>5</p>
+					<!--put your stuff inside -->
+				</div>
+			</div>
+			<div class="prev nav" role="button" onclick="onClickHandler(this, -1)">&#10094;</div>
+			<div class="next nav" role="button" onclick="onClickHandler(this, 1)">&#10095;</div>
+		</div>
+		<br>
+		Slideshow endless
+		<div class="content-box">	<!-- .content-box: surrounds itemContainer and navigation-->
+			<div id="slide_loop" class="carousel-items" data-viewSize="3" data-loop="true">	<!-- id: You are free to choose (must be unique)  .carousel-items: important for onClickHandler-->
+				<div class="item">
+					<p>0</p>
+					<!--put your stuff inside -->
+				</div>
+				<div class="item">
+					<p>1</p>
+					<!--put your stuff inside -->
+				</div>
+				<div class="item">
+					<p>2</p>
+					<!--put your stuff inside -->
+				</div>
+				<div class="item">
+					<p>3</p>
+					<!--put your stuff inside -->
+				</div>
+				<div class="item">
+					<p>4</p>
+					<!--put your stuff inside -->
+				</div>
+				<div class="item">
+					<p>5</p> 
+					<!--put your stuff inside -->
+				</div>
+			</div>
+			<div class="prev nav" role="button" onclick="onClickHandler(this, -1)">&#10094;</div>
+			<div class="next nav" role="button" onclick="onClickHandler(this, 1)">&#10095;</div>
+		</div>
+		<script>
+			init("slide_StoE"); <!-- initialization  commit id from div.carousel-items-->
+			init("slide_loop"); <!-- initialization  commit id from div.carousel-items -->
+		</script>
+	</body>
+</html>
