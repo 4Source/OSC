@@ -9,7 +9,7 @@ Open Slide Carousel - Add Your Website an GNU Slideshow
     
    	`</div>`
    
-1. Add an `<div>` inside content-box
+1. ### Add an `<div>` inside content-box
 	<br>With arguments:
  	- id="choose somting unique"
  	- class="carousel-items"
@@ -22,13 +22,13 @@ Open Slide Carousel - Add Your Website an GNU Slideshow
     
   	`</div>`
   
-1. Add an `<div>` with class "item" inside carousel-items
+1. ### Add an `<div>` with class "item" inside carousel-items
   
   	`<div class="item">`
 	    <!--put your stuff inside -->					
    	`</div>`
   
-1. Add an `<div>` inside content-box
+1. ### Add an `<div>` inside content-box
   	<br>With arguments:
  	- class="prev nav"
  	- role="button"
@@ -38,7 +38,7 @@ Open Slide Carousel - Add Your Website an GNU Slideshow
       	    `&#10094;`
   	`</div>`
   
-1. Add an <div> inside content-box
+1. ### Add an `<div>` inside content-box
   	<br>With arguments:
  	- class="next nav"
  	- role="button"
