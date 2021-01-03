@@ -10,7 +10,7 @@ Open Slide Carousel - Add Your Website an GNU Slideshow
    	`</div>`
    
 ### 1. Add an `<div>` inside content-box
-	With arguments:
+With arguments:
  	- id="choose somting unique"
  	- class="carousel-items"
  	- data-viewSize="3" (number 1 - ?)(optional)
@@ -48,19 +48,20 @@ Open Slide Carousel - Add Your Website an GNU Slideshow
   	`</div>`
   
 ### Complete could look like this
-`<div class="content-box">`
-	`<div id="slide_StoE" class="carousel-items" data-viewSize="3" data-loop="false">`
-		`<div class="item">`
-			`<p>0</p>`
-			`<!--put your stuff inside -->`					
-		`</div>`
-		`<div class="item">`
-			`<p>1</p>`
-			`<!--put your stuff inside -->`
-		`</div>`
-        	`<!--...-->`
-	`</div>`
-	`<div class="prev nav" role="button" onclick="onClickHandler(this, -1)">&#10094;</div>`
-	`<div class="next nav" role="button" onclick="onClickHandler(this, 1)">&#10095;</div>`
-`</div>`
-  
+```
+<div class="content-box">
+	<div id="slide_StoE" class="carousel-items" data-viewSize="3" data-loop="false">
+		<div class="item">
+			<p>0</p>
+			<!--put your stuff inside -->				
+		</div>
+		<div class="item">
+			<p>1</p>
+			<!--put your stuff inside -->
+		</div>
+        	<!--...-->
+	</div>
+	<div class="prev nav" role="button" onclick="onClickHandler(this, -1)">&#10094;</div>
+	<div class="next nav" role="button" onclick="onClickHandler(this, 1)">&#10095;</div>
+</div>
+```
