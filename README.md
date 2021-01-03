@@ -57,7 +57,7 @@ With arguments:
 	init("YOURSlide");			
 </script>
 ```
-### Complete could look like this
+### Complete Code could look like this
 ```
 <!DOCTYPE html>
 <html>
