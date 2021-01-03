@@ -1,7 +1,7 @@
 # OSC
 Open Slide Carousel - Add Your Website an GNU Slideshow 
 
-##How to Use
+## How to Use
 1. Add an <div> with class "content-box" inside body
    Here you can Set height/width in CSS
    
@@ -9,7 +9,7 @@ Open Slide Carousel - Add Your Website an GNU Slideshow
     
    </div>
    
-2. Add an <div> inside content-box
+1. Add an <div> inside content-box
   With arguments:
  - id="choose somting unique"
  - class="carousel-items"
@@ -22,13 +22,13 @@ Open Slide Carousel - Add Your Website an GNU Slideshow
     
   </div>
   
-3. Add an <div> with class "item" inside carousel-items
+1. Add an <div> with class "item" inside carousel-items
   
   <div class="item">
 	    <!--put your stuff inside -->					
 	</div>
   
-4. Add an <div> inside content-box
+1. Add an <div> inside content-box
   With arguments:
  - class="prev nav"
  - role="button"
@@ -38,7 +38,7 @@ Open Slide Carousel - Add Your Website an GNU Slideshow
       &#10094;
   </div>
   
-5. Add an <div> inside content-box
+1. Add an <div> inside content-box
   With arguments:
  - class="next nav"
  - role="button"
@@ -48,7 +48,7 @@ Open Slide Carousel - Add Your Website an GNU Slideshow
       &#10095;
   </div>
   
-###Complete could look like this
+### Complete could look like this
 <div class="content-box">
 		<div id="slide_StoE" class="carousel-items" data-viewSize="3" data-loop="false">
 				<div class="item">
