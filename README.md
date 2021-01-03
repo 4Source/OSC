@@ -23,13 +23,12 @@ Open Slide Carousel - Add Your Website an GNU Slideshow
   	`</div>`
   
 1. ### Add an `<div>` with class "item" inside carousel-items
-  
   	`<div class="item">`
-	    <!--put your stuff inside -->					
+	    `<!--put your stuff inside -->`					
    	`</div>`
   
 1. ### Add an `<div>` inside content-box
-  	<br>With arguments:
+  	With arguments:
  	- class="prev nav"
  	- role="button"
  	- onclick="onClickHandler(this, -1)
@@ -39,7 +38,7 @@ Open Slide Carousel - Add Your Website an GNU Slideshow
   	`</div>`
   
 1. ### Add an `<div>` inside content-box
-  	<br>With arguments:
+  	With arguments:
  	- class="next nav"
  	- role="button"
  	- onclick="onClickHandler(this, 1)
