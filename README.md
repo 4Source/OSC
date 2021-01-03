@@ -3,7 +3,7 @@ Open Slide Carousel - Add Your Website an GNU Slideshow
 
 ## How to Use
 1. Add an `<div>` with class "content-box" inside body
-   Here you can Set height/width in CSS
+   <br>Here you can Set height/width in CSS
    
    `<div class="content-box">`
     
