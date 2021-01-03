@@ -11,11 +11,11 @@ Open Slide Carousel - Add Your Website an GNU Slideshow
 ```
 ### 1. Add an `<div>` inside content-box
 	With arguments:
- 	- id="choose somting unique"
- 	- class="carousel-items"
- 	- data-viewSize="3" (number 1 - ?)(optional)
+ 	- `id="choose somting unique"`
+ 	- `class="carousel-items"`
+ 	- `data-viewSize="3"` (number 1 - ?)(optional)
    	  <br>How many items are placed by side. 
- 	- data-loop="true" (true, false)(optional)
+ 	- `data-loop="true"` (true, false)(optional)
    	  <br>Should be continued with the first after the last item.
 ```  
   	<div id="YOURSlide" class="carousel-items" data-viewSize="3" data-loop="false">
