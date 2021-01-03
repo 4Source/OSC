@@ -14,9 +14,9 @@ With arguments:
 - id="choose somting unique"
 - class="carousel-items"
 - data-viewSize="3" (number 1 - ?)(optional)
->How many items are placed by side. 
+  How many items are placed by side. 
 - data-loop="true" (true, false)(optional)
->Should be continued with the first after the last item.
+  Should be continued with the first after the last item.
 ```  
 <div id="YOURSlide" class="carousel-items" data-viewSize="3" data-loop="false">
     
