@@ -21,7 +21,7 @@ With arguments:
 - data-loop="true" (true, false)(optional)
 <br>Should be continued with the first after the last item.
 ```  
-<div id="YOURSlide" class="carousel-items" data-viewSize="3" data-loop="false">
+<div id="YOURSlide" class="carousel-items" data-viewSize="1" data-loop="true">
     
 </div>
 ```  
@@ -69,7 +69,7 @@ With arguments:
 	</head>
 	<body>
 		<div class="content-box">
-			<div id="YOURSlide" class="carousel-items" data-viewSize="3" data-loop="false">
+			<div id="YOURSlide" class="carousel-items" data-viewSize="1" data-loop="true">
 				<div class="item">
 					<p>0</p>
 					<!--put your stuff inside -->				
