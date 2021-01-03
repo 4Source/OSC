@@ -4,7 +4,7 @@ Open Slide Carousel - Add Your Website an GNU Slideshow
 ## How to Use
 ### 1. Add this Lines inside Header
 `<link rel="stylesheet" title="style_OpenSlideCarousel" type="text/css" href="style\style_osc.css">`
-`<script src="script/osc.js"></script>`
+<br>`<script src="script/osc.js"></script>`
 ### 2. Add an `<div>` with class "content-box" inside body
 Here you can Set height/width in CSS
 ```
@@ -25,7 +25,7 @@ With arguments:
     
 </div>
 ```  
-### 4. Add an `<div>` with class "item" inside carousel-items
+### 4. Add multible `<div>` with class "item" inside carousel-items
 ```  	
 <div class="item">
 	<!--put your stuff inside -->				
