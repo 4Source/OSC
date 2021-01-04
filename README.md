@@ -1,5 +1,5 @@
 [![License](https://img.shields.io/badge/License-GNU__v3.0-brightgreen.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0.en.html) 
-[![Version](https://img.shields.io/badge/Version-v0.1.0-brightgreen.svg?style=flat-square)](https://github.com/4Source/OSC)
+[![Latest Release](https://img.shields.io/github/v/release/4Source/OSC.svg?label=Latest%20Release&style=flat-square)](https://github.com/4Source/OSC/releases)
 # OSC
 Open Slide Carousel - Add Your Website an GNU Slideshow 
 
