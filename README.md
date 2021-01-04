@@ -1,3 +1,4 @@
+[https://img.shields.io/badge/License-GNU__v3.0-brightgreen](http://https://www.gnu.org/licenses/gpl-3.0.en.html) https://img.shields.io/badge/Version-v0.1.0-brightgreen
 # OSC
 Open Slide Carousel - Add Your Website an GNU Slideshow 
 
@@ -89,3 +90,5 @@ With arguments:
 	</body>
 </html>
 ```
+## License
+[https://img.shields.io/badge/License-GNU__v3.0-brightgreen](http://https://www.gnu.org/licenses/gpl-3.0.en.html)
