@@ -9,18 +9,14 @@ function onClickHandler(elmnt, value) {
     var itemsElmnt = document.querySelector("#" + elmnt.parentElement.children.item(0).children.item(0).id);
 	plusSlide(itemsElmnt, parseInt(value));
 }
-//Variable
-	// var slides = [];
-//Initialisation
-function init(id/* , options */) {
+function init(id) {
 	var selector = document.getElementById(id);
 	initOptions(selector);
 	buildNavigations(selector);
 	buildItemView(selector);
-	// slides.push(selector);
 	setupSlide(selector, getIndex(selector));
 }
-function initOptions(selector/* , options */) {
+function initOptions(selector) {
 	if(selector.getAttribute("data-index") == null || selector.getAttribute("data-index") == "") {
 		selector.setAttribute("data-index", "0");
 	}
@@ -44,10 +40,6 @@ function buildNavigations(selector) {
     nextNav.style.top = ((selector.parentElement.offsetHeight / 2) + selector.parentElement.offsetTop) + "px";
 }
 function buildItemView(selector) {
-	var styleEl = document.createElement("style")
-	document.head.appendChild(styleEl);
-	var stylesheet = styleEl.sheet;
-
     var itemStyle = getComputedStyle(selector.children.item(0));
 	var contentboxStyle = getComputedStyle(selector.parentElement);
 	
