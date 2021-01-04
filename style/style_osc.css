@@ -2,11 +2,10 @@
 	box-sizing: border-box;
 }
 .content-box {
-	/* position: relative; */
 	height: 200px;
 	width: 600px;
 	padding: 10px;
-	background-color: red;
+	background-color: grey;
 	border-radius: 4px;
 }
 .view{
@@ -19,11 +18,8 @@
 	/*height:	Do NOT define for item! Done by js.*/
 	/*width:	Do NOT define for item! Done by js.*/
 	/*margin:	Do NOT define for item! Done by js.*/
-	
-	height: 150px;
-	width: 50px;
-	
-	background-color: green;
+
+	background-color: #222222;
 	padding: 8px;
 	margin-left: 4px;
 	margin-right: 4px;

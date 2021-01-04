@@ -17,18 +17,13 @@ function init(id) {
 	setupSlide(selector, getIndex(selector));
 }
 function initOptions(selector) {
-	if(selector.getAttribute("data-index") == null || selector.getAttribute("data-index") == "") {
-		selector.setAttribute("data-index", "0");
-	}
-	if(selector.getAttribute("data-loop") == null || selector.getAttribute("data-loop") == "") {
-		selector.setAttribute("data-loop", "true");
-	}
-	if(selector.getAttribute("data-viewSize") == null || selector.getAttribute("data-viewSize") == "") {
-		selector.setAttribute("data-viewSize", "3");
-	}
-	else if(selector.getAttribute("data-viewSize") == "0") {
-		selector.setAttribute("data-viewSize", "1");
-	}
+	setIndex(selector, selector.getAttribute("data-index"));
+	
+	setLoop(selector, selector.getAttribute("data-loop"));
+	
+	setViewSize(selector, selector.getAttribute("data-viewSize"));
+	
+	setAlignment(selector, selector.getAttribute("data-alignment"));
 }
 function buildNavigations(selector) {
     var prevNav, nextNav;
@@ -42,7 +37,6 @@ function buildNavigations(selector) {
 function buildItemView(selector) {
     var itemStyle = getComputedStyle(selector.children.item(0));
 	var contentboxStyle = getComputedStyle(selector.parentElement);
-	
 	var length = selector.childElementCount;
 	var viewSize = getViewSize(selector);
 		
@@ -112,20 +106,56 @@ function showSlide(selector, index) {
 			}
 			index = length - viewSize;
 		}
-	
-		for(let i = 0; i < length; i++) { 
-			if(i < index) {
-				posEnd.push(pos[j]);
+		
+		if(getAlignment(selector) == "left") {
+			for(let i = 0; i < length; i++) { 
+				if(i < index) {
+					posEnd.push(pos[j]);
+				}
+				else if(i > index + viewSize) {
+					posEnd.push(pos[j]);
+				}
+				else {
+					j++;
+					posEnd.push(pos[j]);
+				}
+				posStart.push(getPosition(selector.children[i])); 
 			}
-			else if(i > index + viewSize) {
-				posEnd.push(pos[j]);
-			}
-			else {
-				j++;
-				posEnd.push(pos[j]);
-			}
-			posStart.push(getPosition(selector.children[i])); 
 		}
+		else if(getAlignment(selector) == "center") {
+			j = 1;
+			for(let i = 0; i < length; i++) { 
+				if(i < index) {
+					posEnd.push(pos[j]);
+				}
+				else if(i > index + viewSize) {
+					posEnd.push(pos[j]);
+				}
+				else {
+					j++;
+					posEnd.push(pos[j]);
+				}
+				posStart.push(getPosition(selector.children[i])); 
+			}
+		}
+		else if(getAlignment(selector) == "right") {
+			j = viewSize + 1;
+			for(let i = 0; i < length; i++) { 
+				if(i < index) {
+					posEnd.push(pos[j]);
+				}
+				else if(i > index + viewSize) {
+					posEnd.push(pos[j]);
+				}
+				else {
+					j--;
+					posEnd.push(pos[j]);
+				}
+				posStart.push(getPosition(selector.children[i])); 
+				console.log("i " + i + " j " + j);
+			}
+		}
+		
 		
 		var id = setInterval(frame, animSpeed/2);
 			
@@ -158,8 +188,53 @@ function setupSlide(selector, index) {
 	var length = selector.children.length;
 	var pos = []; for(let i = 0; i < viewSize + 2; i++) { pos.push(itemWidth * i); }
 	var j = 0;
-
-	for(let i = 0; i < length; i++) { 
+	
+	if(getAlignment(selector) == "left") {
+			for(let i = 0; i < length; i++) { 
+				if(i < index) {
+					selector.children.item(i).style.left = pos [j] + "px";
+				}
+				else if(i > index + viewSize) {
+					selector.children.item(i).style.left = pos [j] + "px";
+				}
+				else {
+					j++;
+					selector.children.item(i).style.left = pos [j] + "px";
+				}
+			}
+		}
+		else if(getAlignment(selector) == "center") {
+			j = 1;
+			for(let i = 0; i < length; i++) { 
+				if(i < index) {
+					selector.children.item(i).style.left = pos [j] + "px";
+				}
+				else if(i > index + viewSize) {
+					selector.children.item(i).style.left = pos [j] + "px";
+				}
+				else {
+					j++;
+					selector.children.item(i).style.left = pos [j] + "px";
+				}
+			}
+		}
+		else if(getAlignment(selector) == "right") {
+			for(let i = 0; i < length; i++) { 
+				if(i < index) {
+					selector.children.item(i).style.left = pos [j] + "px";
+				}
+				else if(i > index + viewSize) {
+					selector.children.item(i).style.left = pos [j] + "px";
+				}
+				else {
+					j++;
+					selector.children.item(i).style.left = pos [j] + "px";
+				}
+			}
+		}
+		
+	
+	/* for(let i = 0; i < length; i++) { 
 		if(i < index) {
 			selector.children.item(i).style.left = pos [j] + "px";
 		}
@@ -170,7 +245,7 @@ function setupSlide(selector, index) {
 			j++;
 			selector.children.item(i).style.left = pos [j] + "px";
 		}
-	}
+	} */
 	setIndex(selector, index); 
 }
 //Getter
@@ -200,7 +275,57 @@ function getLoop(selector) {
 function getViewSize(selector) {
 	return parseInt(selector.getAttribute("data-viewSize"));
 }
+function getAlignment(selector) {
+	return selector.getAttribute("data-alignment");
+}
 //Setter
 function setIndex(selector, value) {
-    selector.setAttribute("data-index", String(value));
+	if(value == null || value == "") {
+		selector.setAttribute("data-index", "0");
+	}
+	else {
+		selector.setAttribute("data-index", String(value));
+	}
+}
+function setLoop(selector, value) {
+	if(value == null || value == "") {
+		selector.setAttribute("data-loop", "false");
+	}
+	else if (value == 1 || value == true || value == "1" || value == "true" || value == "True" || value == "TRUE") {
+		selector.setAttribute("data-loop", "true");
+	}
+	else if (value == 0 || value == false || value == "0" || value == "false" || value == "False" || value == "FALSE") {
+		selector.setAttribute("data-loop", "false");
+	}
+	else {
+		selector.setAttribute("data-loop", "false");
+	}
+}
+function setViewSize(selector, value) {
+	if(value == null || value == "") {
+		selector.setAttribute("data-viewSize", "3");
+	}
+	else if (value < 0) {
+		selector.setAttribute("data-viewSize", "1");
+	}
+	else {
+		selector.setAttribute("data-viewSize", String(value));
+	}
+}
+function setAlignment(selector, value) {
+	if(value == null || value == "") {
+		selector.setAttribute("data-alignment", "left");
+	}
+	else if(value == "left" || value == "Left" || value == "LEFT" || value == "l" || value == "L") {
+		selector.setAttribute("data-alignment", "left");
+	}
+	else if(value == "center" || value == "Center" || value == "CENTER" || value == "c" || value == "C") {
+		selector.setAttribute("data-alignment", "center");
+	}
+	else if(value == "right" || value == "Right" || value == "RIGHT" || value == "r" || value == "R") {
+		selector.setAttribute("data-alignment", "right");
+	}
+	else {
+		selector.setAttribute("data-alignment", "left");
+	}
 }
