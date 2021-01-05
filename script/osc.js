@@ -63,18 +63,10 @@ function buildItemView(selector) {
 	view.style.position = "absolute";
 }
 //Update
-/* function setupUI() {
-	for(i in slides) {
-		setupSlide(i, getIndex(i));
-	}
-} */
 function plusSlide(selector, value) {
 	if(getAlignment(selector) == "right") {
 		showSlide(selector, getIndex(selector) - value);
 	}
-	/* else if(getAlignment(selector) == "center") {
-		showSlide(selector, getIndex(selector) + value);
-	} */
 	else {
 		showSlide(selector, getIndex(selector) + value);
 	}
@@ -101,39 +93,6 @@ function showSlide(selector, index) {
 			}
 			dir = (index_alt - index) * itemWidth/animSpeed;
 		}
-		/* else if(getAlignment(selector) == "center") {
-			if(getViewSize(selector)%2 == 0){
-				let ii = 0;
-				for(let i = 0; i < viewSize + 4; i++) { 
-					if(i == 0) {
-						pos.push(0);
-					}
-					else if(pos.length <= viewSize) {
-						pos.push(itemWidth * i + itemWidth / 2); 
-						ii = i;
-					}
-					else if(pos.length < viewSize + 4) {
-						pos.push(itemWidth * viewSize + 2);
-					}
-					else if(pos.length < viewSize + 2) {
-						pos.push(itemWidth * ii + itemWidth / 2);
-					}
-				}
-			}
-			else {
-				let ii = 0;
-				for(let i = 0; i < viewSize + 2; i++) { 
-					if(pos.length <= viewSize) {
-						pos.push(itemWidth * i + itemWidth); 
-						ii = i;
-					}
-					else {
-						pos.push(itemWidth * ii + itemWidth);
-					}
-				}
-			}
-			dir = (index_alt - index) * itemWidth/animSpeed;
-		} */
 		else if(getAlignment(selector) == "right") {
 			let ii = viewSize + 2;
 			for(let i = 0; i < viewSize + 2; i++) { 
@@ -155,14 +114,6 @@ function showSlide(selector, index) {
 				index = length - viewSize;
 			}
 		}
-		/* else if(getAlignment(selector) == "center") {
-			if(index < 0) {
-				index = 0;
-			}
-			else if(index > (length - viewSize + 2)) {
-				index = length - viewSize + 2;
-			}
-		} */
 		else {
 			if(index < 0) {
 				index = 0;
@@ -224,18 +175,6 @@ function setupSlide(selector, index) {
 			pos.push(itemWidth * i); 
 		}
 	}
-	/* else if(getAlignment(selector) == "center") {
-		if(getViewSize(selector)%2 == 0){	
-			for(let i = 0; i < viewSize + 2; i++) { 
-				pos.push(itemWidth * i + itemWidth / 2); 
-			}
-		}
-		else {
-			for(let i = 0; i < viewSize + 2; i++) { 
-				pos.push(itemWidth * i + itemWidth); 
-			}
-		}
-	} */
 	else if(getAlignment(selector) == "right") {
 		let ii = viewSize + 2;
 		for(let i = 0; i < viewSize + 2; i++) { 
@@ -331,9 +270,6 @@ function setAlignment(selector, value) {
 	else if(value == "left" || value == "Left" || value == "LEFT" || value == "l" || value == "L") {
 		selector.setAttribute("data-alignment", "left");
 	}
-	/* else if(value == "center" || value == "Center" || value == "CENTER" || value == "c" || value == "C") {
-		selector.setAttribute("data-alignment", "center");
-	} */
 	else if(value == "right" || value == "Right" || value == "RIGHT" || value == "r" || value == "R") {
 		selector.setAttribute("data-alignment", "right");
 	}
