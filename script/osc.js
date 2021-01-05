@@ -64,6 +64,7 @@ function buildItemView(selector) {
 }
 //Update
 /* function setupUI() {
+    // console.log("UPDATE-UI!);
 	for(i in slides) {
 		setupSlide(i, getIndex(i));
 	}
@@ -72,9 +73,9 @@ function plusSlide(selector, value) {
 	if(getAlignment(selector) == "right") {
 		showSlide(selector, getIndex(selector) - value);
 	}
-	/* else if(getAlignment(selector) == "center") {
+	else if(getAlignment(selector) == "center") {
 		showSlide(selector, getIndex(selector) + value);
-	} */
+	}
 	else {
 		showSlide(selector, getIndex(selector) + value);
 	}
@@ -101,7 +102,7 @@ function showSlide(selector, index) {
 			}
 			dir = (index_alt - index) * itemWidth/animSpeed;
 		}
-		/* else if(getAlignment(selector) == "center") {
+		else if(getAlignment(selector) == "center") {
 			if(getViewSize(selector)%2 == 0){
 				let ii = 0;
 				for(let i = 0; i < viewSize + 4; i++) { 
@@ -133,7 +134,7 @@ function showSlide(selector, index) {
 				}
 			}
 			dir = (index_alt - index) * itemWidth/animSpeed;
-		} */
+		}
 		else if(getAlignment(selector) == "right") {
 			let ii = viewSize + 2;
 			for(let i = 0; i < viewSize + 2; i++) { 
@@ -155,14 +156,14 @@ function showSlide(selector, index) {
 				index = length - viewSize;
 			}
 		}
-		/* else if(getAlignment(selector) == "center") {
+		else if(getAlignment(selector) == "center") {
 			if(index < 0) {
 				index = 0;
 			}
 			else if(index > (length - viewSize + 2)) {
 				index = length - viewSize + 2;
 			}
-		} */
+		}
 		else {
 			if(index < 0) {
 				index = 0;
@@ -174,19 +175,27 @@ function showSlide(selector, index) {
 		
 		j = 0;
 		for(let i = 0; i < length; i++) { 
+		// console.log("i" + i + " index " + index + " j " + j);
 			if(i < index) {
 				posEnd.push(pos[j]);
+				// console.log("i < index " + pos[j]);
 			}
 			else if(i > index + viewSize) {
 				posEnd.push(pos[j]);
+				// console.log("i > index + viewSize " + pos[j]);
 			}
 			else {
 				j++;
 				posEnd.push(pos[j]);
+				// console.log("posEnd " + pos[j]);
 			}
 			posStart.push(getPosition(selector.children[i])); 
 		}
-
+		
+		// console.log("pos " + pos);
+		// console.log("posStart " + posStart);
+		// console.log("posEnd " + posEnd);
+		// console.log("dir " + dir);
 		var id = setInterval(frame, animSpeed/2);
 			
 		function frame() {
@@ -224,7 +233,7 @@ function setupSlide(selector, index) {
 			pos.push(itemWidth * i); 
 		}
 	}
-	/* else if(getAlignment(selector) == "center") {
+	else if(getAlignment(selector) == "center") {
 		if(getViewSize(selector)%2 == 0){	
 			for(let i = 0; i < viewSize + 2; i++) { 
 				pos.push(itemWidth * i + itemWidth / 2); 
@@ -235,7 +244,7 @@ function setupSlide(selector, index) {
 				pos.push(itemWidth * i + itemWidth); 
 			}
 		}
-	} */
+	}
 	else if(getAlignment(selector) == "right") {
 		let ii = viewSize + 2;
 		for(let i = 0; i < viewSize + 2; i++) { 
@@ -331,9 +340,9 @@ function setAlignment(selector, value) {
 	else if(value == "left" || value == "Left" || value == "LEFT" || value == "l" || value == "L") {
 		selector.setAttribute("data-alignment", "left");
 	}
-	/* else if(value == "center" || value == "Center" || value == "CENTER" || value == "c" || value == "C") {
+	else if(value == "center" || value == "Center" || value == "CENTER" || value == "c" || value == "C") {
 		selector.setAttribute("data-alignment", "center");
-	} */
+	}
 	else if(value == "right" || value == "Right" || value == "RIGHT" || value == "r" || value == "R") {
 		selector.setAttribute("data-alignment", "right");
 	}

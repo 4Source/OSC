@@ -22,7 +22,7 @@ With arguments:
 <br>How many items are placed by side. 
 - data-loop="false" (true, false)(optional)
 <br>Should be continued with the first after the last item.
-- data-alignment="left" (left, right)(optional)
+- data-alignment="left" (left, center, right)(optional)
 <br>Where active item is placed 
 ```  
 <div id="YOURSlide" class="carousel-items" data-viewSize="3" data-loop="false" data-alignment="left">
