@@ -20,10 +20,12 @@ With arguments:
 - class="carousel-items"
 - data-viewSize="3" (number 1 - ?)(optional)
 <br>How many items are placed by side. 
-- data-loop="true" (true, false)(optional)
+- data-loop="false" (true, false)(optional)
 <br>Should be continued with the first after the last item.
+- data-alignment="left" (left, right)(optional)
+<br>Where active item is placed 
 ```  
-<div id="YOURSlide" class="carousel-items" data-viewSize="1" data-loop="true">
+<div id="YOURSlide" class="carousel-items" data-viewSize="3" data-loop="false" data-alignment="left">
     
 </div>
 ```  
@@ -71,7 +73,7 @@ With arguments:
 	</head>
 	<body>
 		<div class="content-box">
-			<div id="YOURSlide" class="carousel-items" data-viewSize="1" data-loop="true">
+			<div id="YOURSlide" class="carousel-items" data-viewSize="3" data-loop="false" data-alignment="left">
 				<div class="item">
 					<p>0</p>
 					<!--put your stuff inside -->				
