@@ -179,27 +179,27 @@ function showSlide(selector, index) {
 		
 		j = 0;
 		for(let i = 0; i < length; i++) { 
-		console.log("i" + i + " index " + index + " j " + j);
+		// console.log("i" + i + " index " + index + " j " + j);
 			if(i < index) {
 				posEnd.push(pos[j]);
-				console.log("i < index " + pos[j]);
+				// console.log("i < index " + pos[j]);
 			}
 			else if(i > index + viewSize) {
 				posEnd.push(pos[j]);
-				console.log("i > index + viewSize " + pos[j]);
+				// console.log("i > index + viewSize " + pos[j]);
 			}
 			else {
 				j++;
 				posEnd.push(pos[j]);
-				console.log("posEnd " + pos[j]);
+				// console.log("posEnd " + pos[j]);
 			}
 			posStart.push(getPosition(selector.children[i])); 
 		}
 		
-		console.log("pos " + pos);
-		console.log("posStart " + posStart);
-		console.log("posEnd " + posEnd);
-		console.log("dir " + dir);
+		// console.log("pos " + pos);
+		// console.log("posStart " + posStart);
+		// console.log("posEnd " + posEnd);
+		// console.log("dir " + dir);
 		var id = setInterval(frame, animSpeed/2);
 			
 		function frame() {
