@@ -73,7 +73,15 @@ function setupUI() {
 	}
 }
 function plusSlide(selector, value) {
-	showSlide(selector, getIndex(selector) + value);
+	if(getAlignment(selector) == "right") {
+		showSlide(selector, getIndex(selector) - value);
+	}
+	/* else if(getAlignment(selector) == "center") {
+		showSlide(selector, getIndex(selector) + value);
+	} */
+	else {
+		showSlide(selector, getIndex(selector) + value);
+	}
 }
 function currentSlide(selector, index) {
 	showSlide(selector, index)
@@ -85,78 +93,113 @@ function showSlide(selector, index) {
 		var itemWidth = _styleToNumber(itemStyle.width) + _styleToNumber(itemStyle.marginLeft) + _styleToNumber(itemStyle.marginRight);
 		var viewSize = getViewSize(selector);
 		var length = selector.children.length;
-		var pos = []; for(let i = 0; i < viewSize + 2; i++) { pos.push(itemWidth * i); }
-		var j = 0;
+		var pos = [];
+		var j;
 		var posStart = []; 
 		var posEnd = [];
 		var animSpeed = 22;
-		var dir = (index_alt - index) * itemWidth/animSpeed;
-		
-		if(index < 0) {
-			if(getLoop(selector)) {
-				selector.insertBefore(selector.children.item(length - 1), selector.children.item(0));
-				selector.children.item(0).style.left = pos[0] + "px";
-			}
-			index = 0;
-		}
-		else if(index > (length - viewSize)) {
-			if(getLoop(selector)) {
-				selector.appendChild(selector.children.item(0));
-				selector.children.item(length - 1).style.left = pos[viewSize + 1] + "px";
-			}
-			index = length - viewSize;
-		}
+		var dir;
 		
 		if(getAlignment(selector) == "left") {
-			for(let i = 0; i < length; i++) { 
-				if(i < index) {
-					posEnd.push(pos[j]);
-				}
-				else if(i > index + viewSize) {
-					posEnd.push(pos[j]);
-				}
-				else {
-					j++;
-					posEnd.push(pos[j]);
-				}
-				posStart.push(getPosition(selector.children[i])); 
+			for(let i = 0; i < viewSize + 2; i++) { 
+				pos.push(itemWidth * i); 
 			}
+			dir = (index_alt - index) * itemWidth/animSpeed;
 		}
-		else if(getAlignment(selector) == "center") {
-			j = 1;
-			for(let i = 0; i < length; i++) { 
-				if(i < index) {
-					posEnd.push(pos[j]);
+		/* else if(getAlignment(selector) == "center") {
+			if(getViewSize(selector)%2 == 0){
+				let ii = 0;
+				for(let i = 0; i < viewSize + 4; i++) { 
+					if(i == 0) {
+						pos.push(0);
+					}
+					else if(pos.length <= viewSize) {
+						pos.push(itemWidth * i + itemWidth / 2); 
+						ii = i;
+					}
+					else if(pos.length < viewSize + 4) {
+						pos.push(itemWidth * viewSize + 2);
+					}
+					else if(pos.length < viewSize + 2) {
+						pos.push(itemWidth * ii + itemWidth / 2);
+					}
 				}
-				else if(i > index + viewSize) {
-					posEnd.push(pos[j]);
-				}
-				else {
-					j++;
-					posEnd.push(pos[j]);
-				}
-				posStart.push(getPosition(selector.children[i])); 
 			}
-		}
+			else {
+				let ii = 0;
+				for(let i = 0; i < viewSize + 2; i++) { 
+					if(pos.length <= viewSize) {
+						pos.push(itemWidth * i + itemWidth); 
+						ii = i;
+					}
+					else {
+						pos.push(itemWidth * ii + itemWidth);
+					}
+				}
+			}
+			dir = (index_alt - index) * itemWidth/animSpeed;
+		} */
 		else if(getAlignment(selector) == "right") {
-			j = viewSize + 1;
-			for(let i = 0; i < length; i++) { 
-				if(i < index) {
-					posEnd.push(pos[j]);
-				}
-				else if(i > index + viewSize) {
-					posEnd.push(pos[j]);
-				}
-				else {
-					j--;
-					posEnd.push(pos[j]);
-				}
-				posStart.push(getPosition(selector.children[i])); 
-				console.log("i " + i + " j " + j);
+			let ii = viewSize + 2;
+			for(let i = 0; i < viewSize + 2; i++) { 
+				ii--;
+				pos.push(itemWidth * ii); 
+			}
+			dir = -1 * (index_alt - index) * itemWidth/animSpeed;
+		}
+		
+		if(getLoop(selector)) {
+			if(index < 0) {
+				selector.insertBefore(selector.children.item(length - 1), selector.children.item(0));
+				selector.children.item(0).style.left = pos[0] + "px";
+				index = 0;
+			}
+			else if(index > (length - viewSize)) {
+				selector.appendChild(selector.children.item(0));
+				selector.children.item(length - 1).style.left = pos[viewSize + 1] + "px";
+				index = length - viewSize;
+			}
+		}
+		/* else if(getAlignment(selector) == "center") {
+			if(index < 0) {
+				index = 0;
+			}
+			else if(index > (length - viewSize + 2)) {
+				index = length - viewSize + 2;
+			}
+		} */
+		else {
+			if(index < 0) {
+				index = 0;
+			}
+			else if(index > (length - viewSize)) {
+				index = length - viewSize;
 			}
 		}
 		
+		j = 0;
+		for(let i = 0; i < length; i++) { 
+		console.log("i" + i + " index " + index + " j " + j);
+			if(i < index) {
+				posEnd.push(pos[j]);
+				console.log("i < index " + pos[j]);
+			}
+			else if(i > index + viewSize) {
+				posEnd.push(pos[j]);
+				console.log("i > index + viewSize " + pos[j]);
+			}
+			else {
+				j++;
+				posEnd.push(pos[j]);
+				console.log("posEnd " + pos[j]);
+			}
+			posStart.push(getPosition(selector.children[i])); 
+		}
 		
+		console.log("pos " + pos);
+		console.log("posStart " + posStart);
+		console.log("posEnd " + posEnd);
+		console.log("dir " + dir);
 		var id = setInterval(frame, animSpeed/2);
 			
 		function frame() {
@@ -186,55 +229,37 @@ function setupSlide(selector, index) {
 	var itemWidth = _styleToNumber(itemStyle.width) + _styleToNumber(itemStyle.marginLeft) + _styleToNumber(itemStyle.marginRight);
 	var viewSize = getViewSize(selector);
 	var length = selector.children.length;
-	var pos = []; for(let i = 0; i < viewSize + 2; i++) { pos.push(itemWidth * i); }
+	var pos = [];
 	var j = 0;
 	
 	if(getAlignment(selector) == "left") {
-			for(let i = 0; i < length; i++) { 
-				if(i < index) {
-					selector.children.item(i).style.left = pos [j] + "px";
-				}
-				else if(i > index + viewSize) {
-					selector.children.item(i).style.left = pos [j] + "px";
-				}
-				else {
-					j++;
-					selector.children.item(i).style.left = pos [j] + "px";
-				}
+		for(let i = 0; i < viewSize + 2; i++) { 
+			pos.push(itemWidth * i); 
+		}
+	}
+	/* else if(getAlignment(selector) == "center") {
+		if(getViewSize(selector)%2 == 0){	
+			for(let i = 0; i < viewSize + 2; i++) { 
+				pos.push(itemWidth * i + itemWidth / 2); 
 			}
 		}
-		else if(getAlignment(selector) == "center") {
-			j = 1;
-			for(let i = 0; i < length; i++) { 
-				if(i < index) {
-					selector.children.item(i).style.left = pos [j] + "px";
-				}
-				else if(i > index + viewSize) {
-					selector.children.item(i).style.left = pos [j] + "px";
-				}
-				else {
-					j++;
-					selector.children.item(i).style.left = pos [j] + "px";
-				}
+		else {
+			for(let i = 0; i < viewSize + 2; i++) { 
+				pos.push(itemWidth * i + itemWidth); 
 			}
 		}
-		else if(getAlignment(selector) == "right") {
-			for(let i = 0; i < length; i++) { 
-				if(i < index) {
-					selector.children.item(i).style.left = pos [j] + "px";
-				}
-				else if(i > index + viewSize) {
-					selector.children.item(i).style.left = pos [j] + "px";
-				}
-				else {
-					j++;
-					selector.children.item(i).style.left = pos [j] + "px";
-				}
-			}
+	} */
+	else if(getAlignment(selector) == "right") {
+		let ii = viewSize + 2;
+		for(let i = 0; i < viewSize + 2; i++) { 
+			ii--;
+			pos.push(itemWidth * ii); 
 		}
+	}
+	
 		
 	
-	/* for(let i = 0; i < length; i++) { 
+	for(let i = 0; i < length; i++) { 
 		if(i < index) {
 			selector.children.item(i).style.left = pos [j] + "px";
 		}
@@ -245,7 +270,7 @@ function setupSlide(selector, index) {
 			j++;
 			selector.children.item(i).style.left = pos [j] + "px";
 		}
-	} */
+	}
 	setIndex(selector, index); 
 }
 //Getter
@@ -319,9 +344,9 @@ function setAlignment(selector, value) {
 	else if(value == "left" || value == "Left" || value == "LEFT" || value == "l" || value == "L") {
 		selector.setAttribute("data-alignment", "left");
 	}
-	else if(value == "center" || value == "Center" || value == "CENTER" || value == "c" || value == "C") {
+	/* else if(value == "center" || value == "Center" || value == "CENTER" || value == "c" || value == "C") {
 		selector.setAttribute("data-alignment", "center");
-	}
+	} */
 	else if(value == "right" || value == "Right" || value == "RIGHT" || value == "r" || value == "R") {
 		selector.setAttribute("data-alignment", "right");
 	}
