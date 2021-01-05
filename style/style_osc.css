@@ -31,32 +31,50 @@ p {
 .nav {
 	cursor: pointer;
 	position: absolute;
-	width: auto;
-	padding: 16px;
-	margin-top: -28px;
 	color: white;
 	font-weight: bold;
 	font-size: 18px;
 	transition: 0.6s ease;
 	user-select: none;
 }
-.nav:hover {
+.prev:hover, .next:hover{
 	background-color: rgba(0,0,0,0.8);
 }
-.nav:active {
-	background-color: rgba(0,0,0,0.5);
-}
 .prev {
+	padding: 16px;
+	margin-top: -28px;
+	width: auto;
 	float:left;
 	border-radius: 0 4px 4px 0;
 }
 .prev:active {
+	background-color: rgba(0,0,0,0.5);
 	transform: matrix(0.9, 0, 0, 0.9, -2, 0);
 }
 .next {
+	padding: 16px;
+	margin-top: -28px;
+	width: auto;
 	float:right;
 	border-radius: 4px 0 0 4px;
 }
 .next:active {
+	background-color: rgba(0,0,0,0.5);
 	transform: matrix(0.9, 0, 0, 0.9, 2, 0);
 }
+.dot {
+	height: 15px;
+	width: 15px;
+	margin: 0 2px;
+	background-color: rgba(255,255,255,0.3);
+	border-radius: 50%;
+ 	border-color: rgba(0,0,0,0);
+	border-width: 1px;
+	border-style: solid;
+	display: inline-block;
+}
+.dot:hover, .dot:active{
+	background-color: rgba(0,0,0,0.8);
+	border-color: rgba(255,255,255,0.7);
+}
+

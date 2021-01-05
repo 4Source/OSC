@@ -10,7 +10,7 @@ function onClickHandler(elmnt, value) {
 		var itemsElmnt = document.querySelector("#" + elmnt.parentElement.children.item(0).children.item(0).id);
 		plusSlide(itemsElmnt, parseInt(value));
 	}
-	else if(elmnt.className.includes("nav")) {
+	else if(elmnt.className.includes("nav") && elmnt.className.includes("dot")) {
 		
 	}
 }
@@ -28,13 +28,18 @@ function initOptions(selector) {
 	setAlignment(selector, selector.getAttribute("data-alignment"));
 }
 function buildNavigations(selector) {
-    var prevNav, nextNav;
+    var prevNav, nextNav, dotNav;
 	prevNav = document.querySelector("#" + selector.id + " ~ .prev");
     nextNav = document.querySelector("#" + selector.id + " ~ .next");
     prevNav.style.left = selector.parentElement.offsetLeft + "px";
     prevNav.style.top = ((selector.parentElement.offsetHeight / 2) + selector.parentElement.offsetTop) + "px";
     nextNav.style.left = (selector.parentElement.offsetLeft + selector.parentElement.offsetWidth - nextNav.offsetWidth) + "px";
     nextNav.style.top = ((selector.parentElement.offsetHeight / 2) + selector.parentElement.offsetTop) + "px";
+	
+	/* if(document.querySelector("#" + selector.id + " ~ .dot") != null){
+		dotNav = document.querySelector("#" + selector.id + " ~ .dot");
+
+	} */
 }
 function buildItemView(selector) {
     var itemStyle = getComputedStyle(selector.children.item(0));
