@@ -6,8 +6,13 @@ catch (e) {
     return null;
 } }
 function onClickHandler(elmnt, value) {
-    var itemsElmnt = document.querySelector("#" + elmnt.parentElement.children.item(0).children.item(0).id);
-	plusSlide(itemsElmnt, parseInt(value));
+	if(elmnt.className.includes("nav") && (elmnt.className.includes("prev") || elmnt.className.includes("next"))) {
+		var itemsElmnt = document.querySelector("#" + elmnt.parentElement.children.item(0).children.item(0).id);
+		plusSlide(itemsElmnt, parseInt(value));
+	}
+	else if(elmnt.className.includes("nav")) {
+		
+	}
 }
 function init(id) {
 	var selector = document.getElementById(id);
@@ -65,102 +70,111 @@ function buildItemView(selector) {
 //Update
 function plusSlide(selector, value) {
 	if(getAlignment(selector) == "right") {
-		showSlide(selector, getIndex(selector) - value);
+		showSlide(selector, - value);
 	}
 	else {
-		showSlide(selector, getIndex(selector) + value);
+		showSlide(selector, value);
 	}
 }
-/* function currentSlide(selector, index) {
-	showSlide(selector, index)
-} */
-function showSlide(selector, index) {
+function currentSlide(selector, index) {
 	var index_alt = getIndex(selector);
-	if(index_alt != index) {
-		var itemStyle = getComputedStyle(selector.children.item(0));
-		var itemWidth = _styleToNumber(itemStyle.width) + _styleToNumber(itemStyle.marginLeft) + _styleToNumber(itemStyle.marginRight);
-		var viewSize = getViewSize(selector);
-		var length = selector.children.length;
-		var pos = [];
-		var posStart = []; 
-		var posEnd = [];
-		var j, dir;
-		var animSpeed = 22;
-		
-		if(getAlignment(selector) == "left") {
-			for(let i = 0; i < viewSize + 2; i++) { 
-				pos.push(itemWidth * i); 
-			}
-			dir = (index_alt - index) * itemWidth/animSpeed;
+	var value = index - index_alt;
+	showSlide(selector, value)
+}
+function showSlide(selector, value) {
+	var index_alt = getIndex(selector);
+	var index_new = index_alt + value;
+	var viewSize = getViewSize(selector);
+	var length = selector.children.length;
+	var pos = [];
+	var posStart = []; 
+	var posEnd = [];
+	var dir;
+	var itemStyle = getComputedStyle(selector.children.item(0));
+	var itemWidth = _styleToNumber(itemStyle.width) + _styleToNumber(itemStyle.marginLeft) + _styleToNumber(itemStyle.marginRight);
+	
+	//Create available positions
+	if(getAlignment(selector) == "left") {
+		for(let i = 0; i < viewSize + 2; i++) { 
+			pos.push(itemWidth * i); 
 		}
-		else if(getAlignment(selector) == "right") {
-			let ii = viewSize + 2;
-			for(let i = 0; i < viewSize + 2; i++) { 
-				ii--;
-				pos.push(itemWidth * ii); 
-			}
-			dir = -1 * (index_alt - index) * itemWidth/animSpeed;
+		dir = -1 * value * itemWidth/22;
+	}
+	else if(getAlignment(selector) == "right") {
+		let ii = viewSize + 2;
+		for(let i = 0; i < viewSize + 2; i++) { 
+			ii--;
+			pos.push(itemWidth * ii); 
 		}
-		
-		if(getLoop(selector)) {
-			if(index < 0) {
-				selector.insertBefore(selector.children.item(length - 1), selector.children.item(0));
-				selector.children.item(0).style.left = pos[0] + "px";
-				index = 0;
-			}
-			else if(index > (length - viewSize)) {
-				selector.appendChild(selector.children.item(0));
-				selector.children.item(length - 1).style.left = pos[viewSize + 1] + "px";
-				index = length - viewSize;
-			}
+		dir = value * itemWidth/22;
+	}
+	
+	//New Index out of Range
+	if(getLoop(selector)) {
+		while(index_new < 0) {
+			selector.insertBefore(selector.children.item(length - 1), selector.children.item(0));
+			selector.children.item(0).style.left = pos[0] + "px";
+			index_new++;
+		}
+		while(index_new > (length - viewSize)) {
+			selector.appendChild(selector.children.item(0));
+			selector.children.item(length - 1).style.left = pos[viewSize + 1] + "px";
+			index_new--;
+		}
+	}
+	else {
+		if(index_new < 0) {
+			index_new = 0;
+		}
+		else if(index_new > (length - viewSize)) {
+			index_new = length - viewSize;
+		}
+	}
+	
+	//Set positions for Items
+	j = 0;
+	for(let i = 0; i < length; i++) { 
+		if(i < index_new) {
+			posEnd.push(pos[j]);
+		}
+		else if(i > index_new + viewSize) {
+			posEnd.push(pos[j]);
 		}
 		else {
-			if(index < 0) {
-				index = 0;
-			}
-			else if(index > (length - viewSize)) {
-				index = length - viewSize;
-			}
+			j++;
+			posEnd.push(pos[j]);
 		}
+		posStart.push(getPosition(selector.children[i])); 
+	}
+	
+	//Create Animation
+	var id = setInterval(frame, 20);
 		
-		j = 0;
-		for(let i = 0; i < length; i++) { 
-			if(i < index) {
-				posEnd.push(pos[j]);
+	function frame() {
+		var finish = true;
+		for(let i = 0; i < length; i++){
+			posStart[i] += dir;
+			if(dir > 0 && posStart[i] >= posEnd[i]) {
+				posStart[i] = posEnd[i];
 			}
-			else if(i > index + viewSize) {
-				posEnd.push(pos[j]);
+			else if(dir < 0 && posStart[i] <= posEnd[i]) {
+				posStart[i] = posEnd[i];
+			}
+			else if(Math.abs(posEnd[i] - posStart[i]) <= 0.1) {
+				posStart[i] = posEnd[i];
 			}
 			else {
-				j++;
-				posEnd.push(pos[j]);
+				finish = false;
 			}
-			posStart.push(getPosition(selector.children[i])); 
+			selector.children.item(i).style.left = posStart[i] + "px";
 		}
-
-		var id = setInterval(frame, animSpeed/2);
-			
-		function frame() {
-			var finish = true;
-			for(let i = 0; i < length; i++){
-				if(dir > 0 && posStart[i] >= posEnd[i]) {
-				}
-				else if(dir < 0 && posStart[i] <= posEnd[i]) {
-				}
-				else if(Math.abs(posEnd[i] - posStart[i]) <= 0.1) {
-				}
-				else {
-					posStart[i] += dir;
-					selector.children.item(i).style.left = posStart [i] + "px";
-					finish = false;
-				}
-			}
-			if(finish) {
-				clearInterval(id);
-			}
+		if(finish) {
+			clearInterval(id);
 		}
-		setIndex(selector, index); 
 	}
+	
+	//Update Index
+	setIndex(selector, index_new);
 }
 function setupSlide(selector, index) {
 	var itemStyle = getComputedStyle(selector.children.item(0));
