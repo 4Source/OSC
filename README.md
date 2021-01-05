@@ -25,7 +25,7 @@ With arguments:
 - data-alignment="left" (left, right)(optional)
 <br>Where active item is placed 
 ```  
-<div id="YOURSlide" class="carousel-items" data-viewSize="1" data-loop="true" data-alignment="left">
+<div id="YOURSlide" class="carousel-items" data-viewSize="3" data-loop="false" data-alignment="left">
     
 </div>
 ```  
@@ -73,7 +73,7 @@ With arguments:
 	</head>
 	<body>
 		<div class="content-box">
-			<div id="YOURSlide" class="carousel-items" data-viewSize="1" data-loop="true" data-alignment="left">
+			<div id="YOURSlide" class="carousel-items" data-viewSize="3" data-loop="false" data-alignment="left">
 				<div class="item">
 					<p>0</p>
 					<!--put your stuff inside -->				
