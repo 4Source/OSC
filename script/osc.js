@@ -63,6 +63,12 @@ function buildItemView(selector) {
 	view.style.position = "absolute";
 }
 //Update
+/* function setupUI() {
+    // console.log("UPDATE-UI!);
+	for(i in slides) {
+		setupSlide(i, getIndex(i));
+	}
+} */
 function plusSlide(selector, value) {
 	if(getAlignment(selector) == "right") {
 		showSlide(selector, getIndex(selector) - value);
@@ -71,9 +77,9 @@ function plusSlide(selector, value) {
 		showSlide(selector, getIndex(selector) + value);
 	}
 }
-/* function currentSlide(selector, index) {
+function currentSlide(selector, index) {
 	showSlide(selector, index)
-} */
+}
 function showSlide(selector, index) {
 	var index_alt = getIndex(selector);
 	if(index_alt != index) {
@@ -125,19 +131,27 @@ function showSlide(selector, index) {
 		
 		j = 0;
 		for(let i = 0; i < length; i++) { 
+		// console.log("i" + i + " index " + index + " j " + j);
 			if(i < index) {
 				posEnd.push(pos[j]);
+				// console.log("i < index " + pos[j]);
 			}
 			else if(i > index + viewSize) {
 				posEnd.push(pos[j]);
+				// console.log("i > index + viewSize " + pos[j]);
 			}
 			else {
 				j++;
 				posEnd.push(pos[j]);
+				// console.log("posEnd " + pos[j]);
 			}
 			posStart.push(getPosition(selector.children[i])); 
 		}
-
+		
+		// console.log("pos " + pos);
+		// console.log("posStart " + posStart);
+		// console.log("posEnd " + posEnd);
+		// console.log("dir " + dir);
 		var id = setInterval(frame, animSpeed/2);
 			
 		function frame() {
