@@ -93,46 +93,46 @@ With arguments:
 ## Arguments explained
 ### data-index
 
-#### - Allowed values
+#### * Allowed values
 
-#### - Default value
+#### * Default value
 value: 0
 
 ### data-viewSize
 How many items are placed by side.
-#### - Allowed values
+#### * Allowed values
 type: number
 0 -> Sets value depending on the size / item width
 1 - ? -> Sets item width depending on the size / value.
-#### - Default value
+#### * Default value
 value: 0
-#### - Weighting
+#### * Weighting
 
 ### data-loop
 Should be continued with the first after the last item.
-#### - Allowed values
+#### * Allowed values
 
-#### - Default value
+#### * Default value
 
-#### - Weighting
+#### * Weighting
 
 ### data-alignment
 Where active item is placed
-#### - Allowed values
+#### * Allowed values
 
-#### - Default value
+#### * Default value
 
-#### - Weighting
+#### * Weighting
 
 ### data-ratio
 Ration of item width to item height.
-#### - Allowed values
+#### * Allowed values
 type: "width:height"
 width: Takes number from 1 -?
 height: Takes number from 1 -?
-#### - Default value
+#### * Default value
 value: "0:0"
-#### - Weighting
+#### * Weighting
 
 ## License
 [![License](https://img.shields.io/badge/License-GNU__v3.0-brightgreen.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0.en.html)
