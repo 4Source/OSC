@@ -18,7 +18,7 @@ Here you can Set height/width in CSS
 With arguments:
 - id="choose somting unique"
 - class="carousel-items"
-- [data-viewSize](###data-viewSize)="3" (number 1 - ?)(optional) 
+- [data-viewSize](#data-viewSize)="3" (number 1 - ?)(optional) 
 - data-loop="false" (true, false)(optional)
 - data-alignment="left" (left, right)(optional)
 ```  
