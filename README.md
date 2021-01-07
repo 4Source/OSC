@@ -18,10 +18,10 @@ Here you can Set height/width in CSS
 With arguments:
 - id="choose somting unique"
 - class="carousel-items"
-- [data-viewSize](#data-viewSize)="3" (1 - ?)(optional) 
-- [data-loop](#data-loop)="false" (true, false)(optional)
-- [data-alignment](#data-alignment)="left" (left, right)(optional)
-- [data-ratio](#data-ratio)="0:0" ("width:height")(optional)
+- [data-viewSize](#data-viewSize)="3" (optional) 
+- [data-loop](#data-loop)="false" (optional)
+- [data-alignment](#data-alignment)="left" (optional)
+- [data-ratio](#data-ratio)="0:0" (optional)
 ```  
 <div id="YOURSlide" class="carousel-items" [data-viewSize](#data-viewSize)="3" [data-loop](#data-loop)="false" [data-alignment](#data-alignment)="left">
     
