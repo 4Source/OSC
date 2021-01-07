@@ -18,7 +18,8 @@
 	/*height:	Do NOT define for item! Done by js.*/
 	/*width:	Do NOT define for item! Done by js.*/
 	/*margin:	Do NOT define for item! Done by js.*/
-
+	
+	width: 110px;
 	background-color: #222222;
 	padding: 8px;
 	margin-left: 4px;

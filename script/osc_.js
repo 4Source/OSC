@@ -26,7 +26,6 @@ function initOptions(selector) {
 	setLoop(selector, selector.getAttribute("data-loop"));
 	setViewSize(selector, selector.getAttribute("data-viewSize"));
 	setAlignment(selector, selector.getAttribute("data-alignment"));
-	setRatio(selector, getRatioWidth(selector), getRatioHeight(selector));
 }
 function buildNavigations(selector) {
     var prevNav, nextNav, dotNav;
@@ -48,8 +47,7 @@ function buildItemView(selector) {
 	var length = selector.childElementCount;
 	var viewSize = getViewSize(selector);
 	if(viewSize == 0) {
-		viewSize = Math.round(_styleToNumber(contentboxStyle.width)/_styleToNumber(itemStyle.width));
-		setViewSize(selector, String(viewSize));
+		
 	}
 		
 	//Item	
@@ -110,17 +108,15 @@ function showSlide(selector, value) {
 		}
 		dir = -1 * value * itemWidth/22;
 	}
-	// else if(getAlignment(selector) == "center") {
-		// if(viewSize%2 == 0) {
-			// /*Needed*/	
-		// }
-		// else {
-			// for(let i = 0; i < viewSize + 1; i++) { 
-				// pos.push(itemWidth * i + itemWidth); 
-			// }
-			// dir = -1 * value * itemWidth/22;
-		// }
-	// }
+	else if(getAlignment(selector) == "center") {
+		if(viewSize%2 == 0) {	/*Needed*/	}
+		else {
+			for(let i = 0; i < viewSize + 2; i++) { 
+				pos.push(itemWidth * i); 
+			}
+			dir = -1 * value * itemWidth/22;
+		}
+	}
 	else if(getAlignment(selector) == "right") {
 		let ii = viewSize + 2;
 		for(let i = 0; i < viewSize + 2; i++) { 
@@ -128,89 +124,79 @@ function showSlide(selector, value) {
 			pos.push(itemWidth * ii); 
 		}
 		dir = value * itemWidth/22;
-		//value *= -1;
+		value *= -1;
 	}
 	
 	//New Index out of Range
-	if(length > viewSize) {
-		if(getLoop(selector)) {
-			while(index_new < 0) {
-				selector.insertBefore(selector.children.item(length - 1), selector.children.item(0));
-				selector.children.item(0).style.left = pos[0] + "px";
-				index_new++;
-			}
-			while(index_new > (length - viewSize)) {
-				selector.appendChild(selector.children.item(0));
-				selector.children.item(length - 1).style.left = pos[viewSize + 1] + "px";
-				index_new--;
-			}
+	if(getLoop(selector)) {
+		while(index_new < 0) {
+			selector.insertBefore(selector.children.item(length - 1), selector.children.item(0));
+			selector.children.item(0).style.left = pos[0] + "px";
+			index_new++;
 		}
-		else {
-			if(index_new < 0) {
-				index_new = 0;
-				value = 0;
-			}
-			else if(index_new > (length - viewSize)) {
-				index_new = length - viewSize;
-				value = 0;
-			}
+		while(index_new > (length - viewSize)) {
+			selector.appendChild(selector.children.item(0));
+			selector.children.item(length - 1).style.left = pos[viewSize + 1] + "px";
+			index_new--;
 		}
 	}
 	else {
-		index_new = index_alt;
+		if(index_new < 0) {
+			index_new = 0;
+			value = 0;
+		}
+		else if(index_new > (length - viewSize)) {
+			index_new = length - viewSize;
+			value = 0;
+		}
 	}
 	
 	//Set positions for Items
 	console.log("value " + value);
-	var index = 0;
 	for(let i = 0; i < length; i++) { 
-		posStart.push(getPosition(selector.children[i])); 
-		if(getAlignment(selector) == "left") {
-			console.log("left");
-			if(i < index_new) {
-				console.log("i<");
-				console.log("i" + i + " index " + index + " index_new " + index_new + " index_alt " + index_alt);
-				posEnd.push(pos[index]);
-			}
-			else if(i > index_new + viewSize) {
-				console.log("i>=");
-				console.log("i" + i + " index " + index + " index_new " + index_new + " index_alt " + index_alt);
-				posEnd.push(pos[index]);
-			}
-			else {
-				console.log("i" + i + " index " + index + " index_new " + index_new + " index_alt " + index_alt);
-				index++;
-				posEnd.push(pos[index]);
-			}
+		posStart.push(getPosition(selector.children[i]));
+		var index = getIndexFromPosition(selector.children[i]);
+		
+		if(i < index_alt + value) {
+			console.log("i<");
+			console.log("i" + i + " ipos " + index + " index_new " + index_new + " index_alt " + index_alt);
+			console.log("pos " + 0);
+			
+			posEnd.push(pos[0]);
 		}
-		// else if(getAlignment(selector) == "center") {
-			// if(viewSize%2 == 0) {
-				// console.log("center gerade");
-				// Needed	
-			// }
-			// else {
-				// console.log("center ungerade");
-				// Needed
-			// }
-		// }
-		else if(getAlignment(selector) == "right") {
-			console.log("right");
-			if(i < index_new) {
-				console.log("i<");
-				console.log("i" + i + " index " + index + " index_new " + index_new + " index_alt " + index_alt);
-				posEnd.push(pos[index]);
-			}
-			else if(i > index_new + viewSize) {
-				console.log("i>=");
-				console.log("i" + i + " index " + index + " index_new " + index_new + " index_alt " + index_alt);
-				posEnd.push(pos[index]);
-			}
-			else {
-				console.log("i" + i + " index " + index + " index_new " + index_new + " index_alt " + index_alt);
-				index++;
-				posEnd.push(pos[index]);
-			}
+		else if(i >= index_alt + value + viewSize) {
+			console.log("i>=");
+			console.log("i" + i + " ipos " + index + " index_new " + index_new + " index_alt " + index_alt);
+			console.log("pos " + (pos.length - 1));
+			
+			posEnd.push(pos[pos.length - 1]);
+		} 
+		else {
+			console.log("i" + i + " ipos " + index + " index_new " + index_new + " index_alt " + index_alt);
+			console.log("pos " + (index - value));
+			
+			posEnd.push(pos[index - value]);
 		}
+		
+		
+		
+		/* if(index - value >= pos.length){
+			console.log(">=");
+			console.log("i" + i + " ipos " + index);
+			
+			posEnd.push(pos[pos.length - 1]);
+		}
+		else if(index-value < 0) {
+			console.log("<");
+			console.log("i" + i + " ipos " + index);
+			
+			posEnd.push(pos[0]);
+		}
+		else {
+			console.log("i" + i + " ipos " + index);
+			
+			posEnd.push(pos[index-value]);
+		} */
 	}
 	
 	//Create Animation
@@ -256,14 +242,14 @@ function setupSlide(selector, index) {
 			pos.push(itemWidth * i); 
 		}
 	}
-	// else if(getAlignment(selector) == "center") {	
-		// if(viewSize%2 == 0) {		}
-		// else {
-			// for(let i = 0; i < viewSize + 2; i++) { 
-				// pos.push(itemWidth * i); 
-			// }
-		// }
-	// }
+	else if(getAlignment(selector) == "center") {	
+		if(viewSize%2 == 0) {		}
+		else {
+			for(let i = 0; i < viewSize + 2; i++) { 
+				pos.push(itemWidth * i); 
+			}
+		}
+	}
 	else if(getAlignment(selector) == "right") {
 		let ii = viewSize + 2;
 		for(let i = 0; i < viewSize + 2; i++) { 
@@ -302,7 +288,7 @@ function getPosition(selector) {
 	var style = getComputedStyle(selector);
 	return _styleToNumber(style.left);
 }
-function getIndexFromPosition(selector) { 											// only alignment left suport | right & center ERROR
+function getIndexFromPosition(selector) { 														// only alignment left suport | right & center ERROR
 	var itemStyle = getComputedStyle(selector);
 	var itemWidth = _styleToNumber(itemStyle.width) + _styleToNumber(itemStyle.marginLeft) + _styleToNumber(itemStyle.marginRight);
 	var pos = getPosition(selector);
@@ -316,24 +302,6 @@ function getViewSize(selector) {
 }
 function getAlignment(selector) {
 	return selector.getAttribute("data-alignment");
-}
-function getRatio(selector) {
-	var ratio = selector.getAttribute("data-ratio");
-	if(ratio != null && ratio != "") {
-		return ratio;
-	}
-	else 
-	{
-		return "0:0"
-	}
-}
-function getRatioWidth(selector) {
-	var ratio = getRatio(selector).split(':');
-	return ratio[0];
-}
-function getRatioHeight(selector) {
-	var ratio = getRatio(selector).split(':');
-	return ratio[1];
 }
 //Setter
 function setIndex(selector, value) {
@@ -376,24 +344,13 @@ function setAlignment(selector, value) {
 	else if(value == "left" || value == "Left" || value == "LEFT" || value == "l" || value == "L") {
 		selector.setAttribute("data-alignment", "left");
 	}
-	// else if(value == "center" || value == "Center" || value == "CENTER" || value == "c" || value == "C") {
-		// selector.setAttribute("data-alignment", "center");
-	// }																					   
+	else if(value == "center" || value == "Center" || value == "CENTER" || value == "c" || value == "C") {
+		selector.setAttribute("data-alignment", "center");
+	}																					   
 	else if(value == "right" || value == "Right" || value == "RIGHT" || value == "r" || value == "R") {
 		selector.setAttribute("data-alignment", "right");
 	}
 	else {
 		selector.setAttribute("data-alignment", "left");
-	}
-}
-function setRatio(selector, width, height) {
-	if(width == null || width == "" || height == null || height == "") {
-		selector.setAttribute("data-ratio", "0:0");
-	}
-	else if(width > 0 && height > 0) {
-		selector.setAttribute("data-ratio", width + ":" + height);
-	}
-	else {
-		selector.setAttribute("data-ratio", "0:0");
 	}
 }

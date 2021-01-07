@@ -18,12 +18,9 @@ Here you can Set height/width in CSS
 With arguments:
 - id="choose somting unique"
 - class="carousel-items"
-- data-viewSize="3" (number 1 - ?)(optional)
-<br>How many items are placed by side. 
+- [data-viewSize](###data-viewSize)="3" (number 1 - ?)(optional) 
 - data-loop="false" (true, false)(optional)
-<br>Should be continued with the first after the last item.
 - data-alignment="left" (left, right)(optional)
-<br>Where active item is placed 
 ```  
 <div id="YOURSlide" class="carousel-items" data-viewSize="3" data-loop="false" data-alignment="left">
     
@@ -93,5 +90,49 @@ With arguments:
 	</body>
 </html>
 ```
+## Arguments explained
+### data-index
+
+#### Allowed values
+
+#### Default value
+value: 0
+
+### data-viewSize
+How many items are placed by side.
+#### Allowed values
+type: number
+0 -> Sets value depending on the size / item width
+1 - ? -> Sets item width depending on the size / value.
+#### Default value
+value: 0
+#### Weighting
+
+### data-loop
+Should be continued with the first after the last item.
+#### Allowed values
+
+#### Default value
+
+#### Weighting
+
+### data-alignment
+Where active item is placed
+#### Allowed values
+
+#### Default value
+
+#### Weighting
+
+### data-ratio
+Ration of item width to item height.
+#### Allowed values
+type: "width:height"
+width: Takes number from 1 -?
+height: Takes number from 1 -?
+#### Default value
+value: "0:0"
+#### Weighting
+
 ## License
 [![License](https://img.shields.io/badge/License-GNU__v3.0-brightgreen.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0.en.html)
