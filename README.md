@@ -18,9 +18,9 @@ Here you can Set height/width in CSS
 With arguments:
 - id="choose somting unique"
 - class="carousel-items"
-- [data-viewSize](#Argument:_data-viewSize)="3" (number 1 - ?)(optional) 
-- [data-loop](#Argument:_data-loop)="false" (true, false)(optional)
-- [data-alignment](#Argument:_data-alignment)="left" (left, right)(optional)
+- [data-viewSize](#data-viewSize)="3" (number 1 - ?)(optional) 
+- [data-loop](#data-loop)="false" (true, false)(optional)
+- [data-alignment](#data-alignment)="left" (left, right)(optional)
 ```  
 <div id="YOURSlide" class="carousel-items" data-viewSize="3" data-loop="false" data-alignment="left">
     
@@ -91,14 +91,14 @@ With arguments:
 </html>
 ```
 ## Arguments explained
-### Argument: data-index
+### data-index
 
 #### Allowed values
 
 #### Default value
 value: 0
 
-### Argument: data-viewSize
+### data-viewSize
 How many items are placed by side.
 #### Allowed values
 type: number
@@ -108,7 +108,7 @@ type: number
 value: 0
 #### Weighting
 
-### Argument: data-loop
+### data-loop
 Should be continued with the first after the last item.
 #### Allowed values
 
@@ -116,7 +116,7 @@ Should be continued with the first after the last item.
 
 #### Weighting
 
-### Argument: data-alignment
+### data-alignment
 Where active item is placed
 #### Allowed values
 
@@ -124,7 +124,7 @@ Where active item is placed
 
 #### Weighting
 
-### Argument: data-ratio
+### data-ratio
 Ration of item width to item height.
 #### Allowed values
 type: "width:height"
