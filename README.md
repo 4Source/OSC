@@ -35,7 +35,7 @@ With arguments:
 ```  
 You can use also other html tags with class="item".
 ```  	
-<a class="item">
+<a href="https://www.google.com" class="item">
 	<!--put your stuff inside -->				
 </a>
 ```  
