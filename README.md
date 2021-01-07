@@ -23,7 +23,7 @@ With arguments:
 - [data-alignment](#data-alignment)="left" (optional)
 - [data-ratio](#data-ratio)="0:0" (optional)
 ```  
-<div id="YOURSlide" class="carousel-items" [data-viewSize](#data-viewSize)="3" [data-loop](#data-loop)="false">
+<div id="YOURSlide" class="carousel-items" data-viewSize="3" data-loop="false">
     
 </div>
 ```  
@@ -71,7 +71,7 @@ With arguments:
 	</head>
 	<body>
 		<div class="content-box">
-			<div id="YOURSlide" class="carousel-items" [data-viewSize](#data-viewSize)="3" [data-loop](#data-loop)="false">
+			<div id="YOURSlide" class="carousel-items" data-viewSize="3" data-loop="false">
 				<div class="item">
 					<p>0</p>
 					<!--put your stuff inside -->				
