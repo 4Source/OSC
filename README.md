@@ -33,6 +33,12 @@ With arguments:
 	<!--put your stuff inside -->				
 </div>
 ```  
+You can use also other html tags with class="item".
+```  	
+<a class="item">
+	<!--put your stuff inside -->				
+</a>
+```  
 ### 5. Add an `<div>` inside content-box
 With arguments:
 - class="prev nav"
