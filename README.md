@@ -120,8 +120,8 @@ Accepts **positive numbers** and **0** whereby this counts as not set. It is als
 #### Default value
 If not specified, the value **"auto"** is assigned. This is overwritten during the initialization.
 #### Weighting
-If the value **0** or **"auto"** is assigned it is **set automatically** depending on the width of the content-box element and the width of the item elements.
-**Positive numbers** **change the width of the item** depending on the content-box element.
+If the value **0** or **"auto"** is assigned it is **set automatically** depending on the width of the content-box element and the width of the item elements. Height of the element manuell set in style CSS, if not set to height of content-box element.
+**Positive numbers** **change the width of the item** depending on the content-box element. Height set by [data-ratio](#data-ratio), with no data-ratio manuell set in style CSS or automatically get height of content-box element.
 
 ### data-ratio
 Ration of item width to item height.
