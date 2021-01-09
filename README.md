@@ -99,47 +99,46 @@ With arguments:
 ```
 ## Arguments explained
 ### data-index
-
+Contains the index of the item currently displayed in the first position.
 #### Allowed values
-
+Accepts **positive numbers** including **0**.
 #### Default value
-value: 0
-
-### data-viewSize
-How many items are placed by side.
-#### Allowed values
-type: number
-0 -> Sets value depending on the size / item width
-1 - ? -> Sets item width depending on the size / value.
-#### Default value
-value: 0
-#### Weighting
+If not specified, the value **0** is assigned.
 
 ### data-loop
-Should be continued with the first after the last item.
+Decides whether the items are in a loop and at the end the first item is displayed again.
 #### Allowed values
-
+To get a loop:	1, true, "1", **"true"**, "True", "TRUE" <br>
+That it is not a loop:	0, false, "0", **"false"**, "False", "FALSE"
 #### Default value
+If not specified, the value **"false"** is assigned.
 
-#### Weighting
-
-### data-alignment
-Where active item is placed
+### data-viewSize
+How many items can be displayed next to each other.
 #### Allowed values
-
+Accepts **positive numbers** and **0** whereby this counts as not set. It is also possible to specify **"auto"**.
 #### Default value
-
+If not specified, the value **"auto"** is assigned. This is overwritten during the initialization.
 #### Weighting
+If the value **0** or **"auto"** is assigned it is **set automatically** depending on the width of the content-box element and the width of the item elements.
+**Positive numbers** **change the width of the item** depending on the content-box element.
 
 ### data-ratio
 Ration of item width to item height.
 #### Allowed values
-type: "width:height"
-width: Takes number from 1 -?
-height: Takes number from 1 -?
+When formatting, the front number indicates the **width**, which is separated by a **":"** from the second number, which stands for the **height**. The numbers are only a ratio, not the true width or height. **Only** accepts **positive numbers**. Also **0** whereby this counts as not set. 
 #### Default value
-value: "0:0"
+If not specified, the value **"0:0"** is assigned.
 #### Weighting
+If the ratio **"0:0"** is set then the **ratio is ignored**. If a **ratio is specified** and [**data-viewSize**](#data-viewSize) is set to **auto**, the **width is adapted to the height**. If [**data-viewSize**](#data-viewSize) has a **fixed value**, the **height is adapted to the width**.
+
+### data-alignment
+At which position the first index is displayed.
+#### Allowed values
+To position on the left: **"left"**, "Left", "LEFT", "l", "L" <br>
+To position on the right: **"right"**, "Right", "RIGHT", "r", "R"
+#### Default value
+If not specified, the value **"left"** is assigned.
 
 ## License
 [![License](https://img.shields.io/badge/License-GNU__v3.0-brightgreen.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0.en.html)
