@@ -1,5 +1,8 @@
 function _styleToNumber(style) { try {
-    return parseFloat(style.slice(0, -2));
+	if(style != null) {
+		return parseFloat(style.slice(0, -2));
+	}
+	else { return null; }
 }
 catch (e) {
     throw Error(e);
@@ -45,17 +48,69 @@ function buildNavigations(selector) {
 function buildItemView(selector) {
     var itemStyle = getComputedStyle(selector.children.item(0));
 	var contentboxStyle = getComputedStyle(selector.parentElement);
+	var itemHeight, itemWidth, itemPosition;
 	var length = selector.childElementCount;
 	var viewSize = getViewSize(selector);
-	if(viewSize == 0) {
-		viewSize = Math.round(_styleToNumber(contentboxStyle.width)/_styleToNumber(itemStyle.width));
-		setViewSize(selector, String(viewSize));
+	
+	if(viewSize == "auto" || viewSize == 0) {
+		if(getRatioWidth(selector) > 0 && getRatioHeight(selector) > 0) {
+			if(false) {	//manuall Set
+				itemHeight = itemStyle.height;
+			}
+			else {
+				itemHeight = (_styleToNumber(contentboxStyle.height) - _styleToNumber(itemStyle.marginTop) - _styleToNumber(itemStyle.marginBottom) - _styleToNumber(contentboxStyle.paddingTop) - _styleToNumber(contentboxStyle.paddingBottom)) + "px";
+			}
+			var ratioWidth = getRatioWidth(selector);
+			var ratioHeight = getRatioHeight(selector);
+			
+			itemWidth = (_styleToNumber(itemHeight) / ratioHeight * ratioWidth) + "px";
+			viewSize = Math.round(_styleToNumber(contentboxStyle.width)/_styleToNumber(itemWidth));
+			setViewSize(selector, String(viewSize));
+			console.log("0");
+			console.log(itemWidth);
+			console.log(itemHeight);
+		}
+		else {
+			viewSize = Math.round(_styleToNumber(contentboxStyle.width)/_styleToNumber(itemStyle.width));
+			setViewSize(selector, String(viewSize));
+			itemWidth = (_styleToNumber(contentboxStyle.width) - (_styleToNumber(contentboxStyle.paddingLeft) + _styleToNumber(contentboxStyle.paddingRight)) - viewSize * (_styleToNumber(itemStyle.marginLeft) + _styleToNumber(itemStyle.marginRight))) / viewSize + "px";
+			if(false) {	//manuall Set
+				itemHeight = itemStyle.height;
+			}
+			else {
+				itemHeight = (_styleToNumber(contentboxStyle.height) - _styleToNumber(itemStyle.marginTop) - _styleToNumber(itemStyle.marginBottom) - _styleToNumber(contentboxStyle.paddingTop) - _styleToNumber(contentboxStyle.paddingBottom)) + "px";
+			}
+			console.log("1");
+			console.log(itemWidth);
+			console.log(itemHeight);
+		}
 	}
-		
+	else {
+		if(getRatioWidth(selector) > 0 && getRatioHeight(selector) > 0) {
+			var ratioWidth = getRatioWidth(selector);
+			var ratioHeight = getRatioHeight(selector);
+			
+			itemWidth = (_styleToNumber(contentboxStyle.width) - (_styleToNumber(contentboxStyle.paddingLeft) + _styleToNumber(contentboxStyle.paddingRight)) - viewSize * (_styleToNumber(itemStyle.marginLeft) + _styleToNumber(itemStyle.marginRight))) / viewSize + "px";
+			itemHeight = (_styleToNumber(itemWidth) / ratioWidth * ratioHeight) + "px";
+			console.log("2");
+			console.log(itemWidth);
+			console.log(itemHeight);
+		}
+		else {
+			if(false) {	//manuall Set
+				itemHeight = itemStyle.height;
+			}
+			else {
+				itemHeight = (_styleToNumber(contentboxStyle.height) - _styleToNumber(itemStyle.marginTop) - _styleToNumber(itemStyle.marginBottom) - _styleToNumber(contentboxStyle.paddingTop) - _styleToNumber(contentboxStyle.paddingBottom)) + "px";
+			}
+			itemWidth = (_styleToNumber(contentboxStyle.width) - (_styleToNumber(contentboxStyle.paddingLeft) + _styleToNumber(contentboxStyle.paddingRight)) - viewSize * (_styleToNumber(itemStyle.marginLeft) + _styleToNumber(itemStyle.marginRight))) / viewSize + "px";
+			console.log("3");
+			console.log(itemWidth);
+			console.log(itemHeight);
+		}
+	}
 	//Item	
-    var itemHeight = (_styleToNumber(contentboxStyle.height) - _styleToNumber(itemStyle.marginTop) - _styleToNumber(itemStyle.marginBottom) - _styleToNumber(contentboxStyle.paddingTop) - _styleToNumber(contentboxStyle.paddingBottom)) + "px";
-	var itemWidth = (_styleToNumber(contentboxStyle.width) - (_styleToNumber(contentboxStyle.paddingLeft) + _styleToNumber(contentboxStyle.paddingRight)) - viewSize * (_styleToNumber(itemStyle.marginLeft) + _styleToNumber(itemStyle.marginRight))) / viewSize + "px";
-	var itemPosition = "absolute";
+	itemPosition = "absolute";
 	for(let i = 0; i < length; i++) {
 		setIndex(selector.children.item(i), i);
 		selector.children.item(i).style.height = itemHeight;
@@ -76,6 +131,7 @@ function buildItemView(selector) {
 	view.style.height = itemHeight;
 	view.style.width = (_styleToNumber(contentboxStyle.width) -_styleToNumber(contentboxStyle.paddingLeft) - _styleToNumber(contentboxStyle.paddingRight)) + "px";
 	view.style.position = "absolute";
+	//cssRule (target, attribute, value);
 }
 //Update
 function plusSlide(selector, value) {
@@ -312,7 +368,7 @@ function getLoop(selector) {
     return (selector.getAttribute("data-loop") == 'true');
 }
 function getViewSize(selector) {
-	return parseInt(selector.getAttribute("data-viewSize"));
+	return selector.getAttribute("data-viewSize");
 }
 function getAlignment(selector) {
 	return selector.getAttribute("data-alignment");
@@ -324,16 +380,16 @@ function getRatio(selector) {
 	}
 	else 
 	{
-		return "0:0"
+		return "0:0";
 	}
 }
 function getRatioWidth(selector) {
 	var ratio = getRatio(selector).split(':');
-	return ratio[0];
+	return parseInt(ratio[0]);
 }
 function getRatioHeight(selector) {
 	var ratio = getRatio(selector).split(':');
-	return ratio[1];
+	return parseInt(ratio[1]);
 }
 //Setter
 function setIndex(selector, value) {
@@ -360,10 +416,10 @@ function setLoop(selector, value) {
 }
 function setViewSize(selector, value) {
 	if(value == null || value == "") {
-		selector.setAttribute("data-viewSize", "0");
+		selector.setAttribute("data-viewSize", "auto");
 	}
 	else if (value < 0) {
-		selector.setAttribute("data-viewSize", "0");
+		selector.setAttribute("data-viewSize", "auto");
 	}
 	else {
 		selector.setAttribute("data-viewSize", String(value));

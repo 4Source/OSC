@@ -1,5 +1,6 @@
 [![License](https://img.shields.io/badge/License-GNU__v3.0-brightgreen.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0.en.html) 
-[![Latest Release](https://img.shields.io/github/v/release/4Source/OSC.svg?label=Latest%20Release&style=flat-square)](https://github.com/4Source/OSC/releases)
+[![Recommended Release](https://img.shields.io/github/v/release/4Source/OSC.svg?label=Latest%20Release&style=flat-square)](https://github.com/4Source/OSC/releases)
+[![Latest Release](https://img.shields.io/github/v/release/4Source/OSC?include_prereleases&sort=semver.svg?label=Pre-release&style=flat-square)](https://github.com/4Source/OSC/releases)
 # OSC
 Open Slide Carousel - Add Your Website an GNU Slideshow 
 
@@ -120,7 +121,7 @@ Accepts **positive numbers** and **0** whereby this counts as not set. It is als
 #### Default value
 If not specified, the value **"auto"** is assigned. This is overwritten during the initialization.
 #### Weighting
-If the value **0** or **"auto"** is assigned it is **set automatically** depending on the width of the content-box element and the width of the item elements. Height of the element manuell set in style CSS, if not set to height of content-box element.
+If the value **0** or **"auto"** is assigned it is **set automatically** depending on [data-ratio](#data-ratio) or the width of the content-box element and the width of the item elements. Height of the element manuell set in style CSS, if not set to height of content-box element.
 **Positive numbers** **change the width of the item** depending on the content-box element. Height set by [data-ratio](#data-ratio), with no data-ratio manuell set in style CSS or automatically get height of content-box element.
 
 ### data-ratio
